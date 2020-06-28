@@ -10,3 +10,7 @@ case class City(
   district: String,
   population: Int
 )
+
+object City {
+  implicit val cityEncoder: Encoder[City] = deriveEncoder[City]
+}

@@ -1,13 +1,15 @@
 package streaming
 
+import streaming.environment.Environments._
+import streaming.http.Server
 import zio._
 
 object Main extends App {
   def run(args: List[String]): ZIO[ZEnv, Nothing, ExitCode] = {
     val program = for {
-      _ <- zio.console.putStrLn("IT'S ALIVE!")
+      _ <- Server.runServer
     } yield ()
 
-    program.exitCode
+    program.provideLayer(appEnvironment).exitCode
   }
 }
